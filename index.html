@@ -187,11 +187,7 @@
           
             
           
-          安装需要的工具部署linux服务器按照官方文档即可 https://help.aliyun.com/document_detail/98763.html
-教程是win服务器操作
-1.window服务器上安装OpenSSHhttps://github.com/PowerShell/Win32-OpenSSH/releases
-解压目录下执行官网的步骤
-12345678//a.安装命令powershe
+          轻量级一键部署，化繁为简
         </a>
       </p>
 
@@ -205,6 +201,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java/">Java</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BC%80%E6%BA%90-%E5%90%8E%E7%AB%AF/">开源 后端</a>
+            
+          </div>
         
       </div>
     </article>
@@ -233,8 +243,7 @@
           
             
           
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick
+          Quick Start
         </a>
       </p>
 
@@ -248,6 +257,13 @@ Quick
           </div>
         
         
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BC%80%E6%BA%90/">开源</a>
+            
+          </div>
         
       </div>
     </article>
@@ -276,27 +292,7 @@ Quick
           
             
           
-          🎨 Java 学习笔记
-目录面试题
-网上看到写得好的文章收集
-
-自动化部署
-CI/CD流程以及原理说明
-
-设计模式
-策略模式
-单例模式
-工厂模式
-装饰器模式
-观察者模式
-适配器模式
-模板方法模式
-
-SpringBoot
-SpringBoot(1)：公共配置
-SpringBoot(2)：generator
-SpringBoot(3)：docker部署项目
-SpringBoot(4)：单一，base
+          面试题，自动化部署，设计模式，SpringBoot，SpringCloud，常见问题，工具安装配置笔记
         </a>
       </p>
 
@@ -310,6 +306,20 @@ SpringBoot(4)：单一，base
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java/">Java</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+            
+          </div>
         
       </div>
     </article>
@@ -428,6 +438,8 @@ SpringBoot(4)：单一，base
 
 
 
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
 
@@ -437,7 +449,34 @@ SpringBoot(4)：单一，base
       var typing = Fluid.plugins.typing;
       var title = document.getElementById('subtitle').title;
       
-      typing(title)
+      $.ajax({
+        type: 'GET',
+        url: 'https://v1.jinrishici.com/all.json',
+        headers: {},
+        dataType: 'json',
+        success: function (result) {
+          var text;
+          if (result) {
+            var keys = 'content'.split('.')
+            if (result instanceof Array) {
+              result = result[0]
+            }
+            for (const k of keys) {
+              var value = result[k]
+              if (typeof value === 'string') {
+                text = value
+                break
+              } else if (value instanceof Object) {
+                result = value
+              }
+            }
+          }
+          text ? typing(text) : typing(title);
+        },
+        error: function () {
+          typing(title)
+        }
+      })
       
     })(window, document);
   </script>
