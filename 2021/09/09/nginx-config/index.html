@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://uss.ilovey.live/img/favicon.ico">
+  <link rel="icon" href="https://uss.ilovey.live/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="常用配置，避坑记录">
+  <meta name="author" content="低调小熊猫">
+  <meta name="keywords" content="">
+  
+  <title>nginx-config - 低调小熊猫</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://uss.ilovey.live/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>低调小熊猫</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://uss.ilovey.live/img/posts/article-init.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="nginx-config">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      低调小熊猫
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-09 15:42" pubdate>
+        2021年9月9日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">nginx-config</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2021年9月9日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h3 id="Nginx常用配置，避坑记录"><a href="#Nginx常用配置，避坑记录" class="headerlink" title="Nginx常用配置，避坑记录"></a>Nginx常用配置，避坑记录</h3><h4 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 更新软件包，请确保服务器的软件包已经是最新的。</span><br>sudo yum update -y<br><br><span class="hljs-comment"># 添加 Nginx 源</span><br>sudo rpm -Uvh http:<span class="hljs-regexp">//</span>nginx.org<span class="hljs-regexp">/packages/</span>centos<span class="hljs-regexp">/7/</span>noarch<span class="hljs-regexp">/RPMS/</span>nginx-release-centos-<span class="hljs-number">7</span>-<span class="hljs-number">0</span>.el7.ngx.noarch.rpm<br><br><span class="hljs-comment"># 安装 Nginx</span><br>sudo yum install -y nginx<br><br><span class="hljs-comment"># 启动 Nginx</span><br>sudo systemctl start nginx.service<br><br><span class="hljs-comment"># 设置开机自启 Nginx</span><br>sudo systemctl enable nginx.service<br></code></pre></td></tr></table></figure>
+
+<h4 id="配置-Nginx"><a href="#配置-Nginx" class="headerlink" title="配置 Nginx"></a>配置 Nginx</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 使用 vim 编辑创建 文件名.conf</span><br>vim <span class="hljs-regexp">/etc/</span>nginx<span class="hljs-regexp">/conf.d/</span>文件名.conf<br><br>添加配置<span class="hljs-number">1</span>（配置<span class="hljs-number">1</span>和<span class="hljs-number">2</span>可以同事监听<span class="hljs-number">80</span>端口，绑定不同域名，实现一台服务器nginx同时配置多个前端网站，多个域名空格隔开）<br>server &#123;<br>    listen <span class="hljs-number">80</span>;<br>    server_name 域名<span class="hljs-number">1</span> 域名<span class="hljs-number">2</span> localhost;<br><br>    location / &#123;<br>        proxy_set_header HOST <span class="hljs-variable">$host</span>;<br>        proxy_set_header X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;<br>        proxy_set_header X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br><br>        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:端口/;<br>    &#125;<br>&#125;<br><br>添加配置<span class="hljs-number">2</span><br>server &#123;<br>    listen <span class="hljs-number">80</span>;<br>    server_name 域名<span class="hljs-number">1</span> 域名<span class="hljs-number">2</span> localhost;<br><br>    location / &#123;<br>        proxy_set_header HOST <span class="hljs-variable">$host</span>;<br>        proxy_set_header X-Forwarded-Proto <span class="hljs-variable">$scheme</span>;<br>        proxy_set_header X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br><br>        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:端口/;<br>    &#125;<br><br>&#125;<br><br>代理静态网站 root指定磁盘目录<br>server &#123;<br>    listen       <span class="hljs-number">80</span>;<br>    server_name  域名<span class="hljs-number">1</span> 域名<span class="hljs-number">2</span> 多个域名空格隔开 localhost;<br>    location / &#123;<br>       try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span><span class="hljs-regexp">/ /i</span>ndex.html;<br>       root D:\test-web;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim">检查配置是否有误<br>sudo nginx -t<br><br>重载/重启 Nginx 配置<br>sudo nginx -s reload<br><br>查看nginx安装目录<br><span class="hljs-keyword">ps</span> -ef | <span class="hljs-keyword">grep</span> nginx<br></code></pre></td></tr></table></figure>
+<h4 id="错误及解决办法"><a href="#错误及解决办法" class="headerlink" title="错误及解决办法"></a>错误及解决办法</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs awk">不能访问子路径错误：<br>location /flow &#123;<br>    proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9083</span>/;<br>&#125;<br>修改：<br>location <span class="hljs-regexp">/flow/</span> &#123;<br>    proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">9083</span>/;<br>&#125;<br>解决：<span class="hljs-regexp">/flow 后面加个/</span><br><br>配置多个前端代码<span class="hljs-regexp">/a/</span> <span class="hljs-regexp">/b/</span>不能访问<br>解决：把<span class="hljs-regexp">/a/</span> <span class="hljs-regexp">/b/</span>放在根目录下面 （就是只有一个根目录，不过根目录里面可以放很多项目文件夹）<br><br>去掉请求后面的斜杠 添加在location节点里面 解决浏览器请求拼接到接口前面的诡异问题<br>rewrite ^<span class="hljs-regexp">/(.*)/</span>$ /<span class="hljs-variable">$1</span> permanent;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="前后端分离项目部署"><a href="#前后端分离项目部署" class="headerlink" title="前后端分离项目部署"></a>前后端分离项目部署</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">##前端配置</span><br>location /gov_flow &#123;<br>                <span class="hljs-comment">##放再nginx下的/content/gov_flow目录</span><br>                alias <span class="hljs-regexp">/var/</span>html/gov_flow;<br>                try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span><span class="hljs-regexp">/ /i</span>ndex.html;<br>                index index.html;<br>        &#125;<br>        <br><span class="hljs-comment">##后端接口配置            </span><br>location <span class="hljs-regexp">/stage-prod-api/</span> &#123;<br>            proxy_set_header Host <span class="hljs-variable">$http_host</span>;<br>            proxy_set_header X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>            proxy_set_header REMOTE-HOST <span class="hljs-variable">$remote_addr</span>;<br>            proxy_set_header X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>            proxy_pass http:<span class="hljs-regexp">//</span>flow:<span class="hljs-number">9083</span>/;<br>    &#125;<br>location <span class="hljs-regexp">/stage-test-api/</span>&#123;<br>        proxy_set_header Host <span class="hljs-variable">$http_host</span>;<br>        proxy_set_header X-Real-IP <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header REMOTE-HOST <span class="hljs-variable">$remote_addr</span>;<br>        proxy_set_header X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;<br>        proxy_pass http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8080</span>/;<br>&#125;<br>    <br><span class="hljs-comment">#两个后端项目接口合并成一个 给前端访问9991</span><br>server &#123;<br>    listen       <span class="hljs-number">9991</span>;<br>    server_name  localhost;<br>    location <span class="hljs-regexp">/yqt/</span>&#123;<br>        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">39.99</span>.<span class="hljs-number">190.224</span>:<span class="hljs-number">8888</span><span class="hljs-regexp">/yqt/</span>;<br>    &#125;<br><br>    location <span class="hljs-regexp">/ad/</span>&#123;<br>        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">39.99</span>.<span class="hljs-number">190.224</span>:<span class="hljs-number">8090</span><span class="hljs-regexp">/ad/</span>;<br>    &#125;<br>&#125;   <br></code></pre></td></tr></table></figure>
+
+<h4 id="nginx配置ssl证书示例1"><a href="#nginx配置ssl证书示例1" class="headerlink" title="nginx配置ssl证书示例1"></a>nginx配置ssl证书示例1</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs awk">http&#123;<br><span class="hljs-comment">#http节点中可以添加多个server节点</span><br>server&#123;<br>    <span class="hljs-comment">#ssl 需要监听443端口</span><br>    listen <span class="hljs-number">443</span>;<br>    <span class="hljs-comment"># CA证书对应的域名</span><br>    server_name www.ilovey.live;<br>    <span class="hljs-comment"># 开启ssl</span><br>    ssl on;<br>    <span class="hljs-comment"># 服务器证书绝对路径</span><br>    ssl_certificate <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/nginx/</span>conf.d/<span class="hljs-number">4467149</span>_www.ilovey.live.pem;<br>    <span class="hljs-comment"># 服务器端证书key绝对路径 </span><br>    ssl_certificate_key <span class="hljs-regexp">/www/</span>server<span class="hljs-regexp">/nginx/</span>conf.d/<span class="hljs-number">4467149</span>_www.ilovey.live.key;<br>    <span class="hljs-comment"># session超时</span><br>    ssl_session_timeout <span class="hljs-number">5</span>m;<br>    <span class="hljs-comment"># 协议类型</span><br>    ssl_protocols TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;<br>    <span class="hljs-comment"># ssl算法列表 </span><br>    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<br>    <span class="hljs-comment">#  是否 服务器决定使用哪种算法  on/off   TLSv1.1 的话需要开启</span><br>    ssl_prefer_server_ciphers on;<br>    <br>    location ^~  <span class="hljs-regexp">/zhihao/</span> &#123;<br>        proxy_set_header Host <span class="hljs-variable">$host</span>;<br>        proxy_pass http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">8080</span>/;<br>    &#125;<br>&#125;<br><span class="hljs-comment"># 如果用户通过 http 访问 直接重写 跳转到 https 这个是一个很有必要的操作</span><br>server&#123;<br>    listen <span class="hljs-number">80</span>;<br>    server_name www.ilovey.live;<br>    rewrite ^<span class="hljs-regexp">/(.*)$ https:/</span><span class="hljs-regexp">/www.ilovey.live:443/</span><span class="hljs-variable">$1</span> permanent;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="nginx配置ssl证书示例2"><a href="#nginx配置ssl证书示例2" class="headerlink" title="nginx配置ssl证书示例2"></a>nginx配置ssl证书示例2</h4><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">server</span><br>&#123;<br><span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;<br><span class="hljs-attribute">listen</span> <span class="hljs-number">443</span> ssl http2;<br><span class="hljs-attribute">server_name</span> aodeng.cc <span class="hljs-number">47.106.252.58</span> ilovey.live;<br><span class="hljs-attribute">index</span> index.php index.html index.htm default.php default.htm default.html;<br><span class="hljs-attribute">root</span> /www/wwwroot/网站目录;<br><br><span class="hljs-comment">#SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则</span><br><span class="hljs-comment">#error_page 404/404.html;</span><br><span class="hljs-attribute">ssl_certificate</span>    /www/server/nginx/conf.d/4467149_www.ilovey.live.pem;<br><span class="hljs-attribute">ssl_certificate_key</span>    /www/server/nginx/conf.d/4467149_www.ilovey.live.key;<br><span class="hljs-attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;<br><span class="hljs-attribute">ssl_ciphers</span> ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;<br><span class="hljs-attribute">ssl_prefer_server_ciphers</span> <span class="hljs-literal">on</span>;<br><span class="hljs-attribute">ssl_session_cache</span> shared:SSL:<span class="hljs-number">10m</span>;<br><span class="hljs-attribute">ssl_session_timeout</span> <span class="hljs-number">10m</span>;<br><span class="hljs-attribute">error_page</span> <span class="hljs-number">497</span>  https://$host$request_uri;<br><br><br><span class="hljs-comment">#SSL-END</span><br><br><span class="hljs-comment">#ERROR-PAGE-START  错误页配置，可以注释、删除或修改</span><br><span class="hljs-comment">#error_page 404 /404.html;</span><br><span class="hljs-comment">#error_page 502 /502.html;</span><br><span class="hljs-comment">#ERROR-PAGE-END</span><br><br><span class="hljs-comment">#PHP-INFO-START  PHP引用配置，可以注释或修改</span><br><br><span class="hljs-comment">#PROXY-START</span><br><span class="hljs-attribute">location</span> /<br>&#123;<br>    <span class="hljs-attribute">proxy_pass</span> http://localhost:8886;<br>    <span class="hljs-attribute">proxy_set_header</span> Host $host;<br>    <span class="hljs-attribute">proxy_set_header</span> X-Real-IP $remote_addr;<br>    <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;<br>    <span class="hljs-attribute">proxy_set_header</span> REMOTE-HOST $remote_addr;<br><br>    <span class="hljs-comment">#持久化连接相关配置</span><br>    <span class="hljs-comment">#proxy_connect_timeout 30s;</span><br>    <span class="hljs-comment">#proxy_read_timeout 86400s;</span><br>    <span class="hljs-comment">#proxy_send_timeout 30s;</span><br>    <span class="hljs-comment">#proxy_http_version 1.1;</span><br>    <span class="hljs-comment">#proxy_set_header Upgrade $http_upgrade;</span><br>    <span class="hljs-comment">#proxy_set_header Connection &quot;upgrade&quot;;</span><br>    <span class="hljs-comment">##expires 12h;</span><br>&#125;<br><br><span class="hljs-comment">#PHP-INFO-END</span><br><br><br><br><span class="hljs-comment">#禁止访问的文件或目录</span><br><span class="hljs-attribute">location</span> <span class="hljs-regexp">~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md)</span><br>&#123;<br>    <span class="hljs-attribute">return</span> <span class="hljs-number">404</span>;<br>&#125;<br><br><span class="hljs-comment">#一键申请SSL证书验证目录相关设置</span><br><span class="hljs-attribute">location</span> <span class="hljs-regexp">~ \.well-known</span>&#123;<br>    <span class="hljs-attribute">allow</span> all;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Nginx/">Nginx</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，最终版权归原作者 <a target="_blank" rel="noopener" href="https://ilovey.live">低调小熊猫<a/> 所有，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/08/ELK/">
+                        <span class="hidden-mobile">搭建ELK日志分析平台</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wmfkkqrS00AbmsGwdFPbOQbA-gzGzoHsz","appKey":"M7QXdlW6Nv0JW2Kdg055JuYU","placeholder":"说点什么吧 也可留言申请加入友链，按一定格式提供信息即可","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://travellings.link/assets/logo.gif" srcset="https://uss.ilovey.live/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2021 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备18057116号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f5cdf0573c2e53438c222dcf9c80fcec";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-6W2BTPTK9H', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/love.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":1},"log":false});</script></body>
+</html>
