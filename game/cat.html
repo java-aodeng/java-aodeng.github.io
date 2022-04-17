@@ -62,7 +62,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -198,14 +198,6 @@
                     抓住猫咪
                   </a>
                 
-                  
-                  
-                  
-                  <a class="dropdown-item" href="/game/high">
-                    <i class="iconfont icon-reddit-fill"></i>
-                    燥起来！
-                  </a>
-                
               </div>
             </li>
           
@@ -228,7 +220,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://uss.ilovey.live/img/archives.png') no-repeat center center;
+         style="background: url('https://uss.ilovey.live/img/girl2.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -258,7 +250,7 @@
                 
 
 <article class="page-content">
-  <h2 id="游戏规则"><a href="#游戏规则" class="headerlink" title="游戏规则"></a>游戏规则</h2><ol>
+  <h4 id="游戏规则"><a href="#游戏规则" class="headerlink" title="游戏规则"></a>游戏规则</h4><ol>
 <li>点击小圆点，围住小猫。</li>
 <li>你点击一次，小猫走一次。</li>
 <li>直到你把小猫围住（赢），或者小猫走到边界并逃跑（输）。</li>
@@ -271,8 +263,35 @@
 <script src="//cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/js/catch-the-cat/phaser.min.js"></script>
 <script src="//cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/js/catch-the-cat/catch-the-cat.js"></script>
 <script defer="defer" src="//cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/js/catch-the-cat/game.js"></script>
-<!-- <script defer="defer" src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>* -->
+<script defer="defer" src="//cdn.jsdelivr.net/gh/bynotes/texiao/source/js/yinghua.js"></script>*
 
+  
+    <!-- Comments -->
+    <article class="comments" id="comments" lazyload>
+      
+      
+        
+      
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wmfkkqrS00AbmsGwdFPbOQbA-gzGzoHsz","appKey":"M7QXdlW6Nv0JW2Kdg055JuYU","placeholder":"说点什么吧，可留言申请加入友链","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
   
 </article>
 
