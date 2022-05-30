@@ -78,9 +78,9 @@
       
       <tag>后端</tag>
       
-      <tag>Docker</tag>
-      
       <tag>Linux</tag>
+      
+      <tag>Docker</tag>
       
       <tag>Kong</tag>
       
@@ -105,9 +105,9 @@
       
       <tag>后端</tag>
       
-      <tag>Linux</tag>
-      
       <tag>Nginx</tag>
+      
+      <tag>Linux</tag>
       
     </tags>
     
@@ -126,13 +126,13 @@
     
     <tags>
       
-      <tag>开源</tag>
-      
       <tag>后端</tag>
       
-      <tag>ELK</tag>
+      <tag>开源</tag>
       
       <tag>Docker</tag>
+      
+      <tag>ELK</tag>
       
     </tags>
     
@@ -157,9 +157,9 @@
     
     <tags>
       
-      <tag>开源</tag>
-      
       <tag>后端</tag>
+      
+      <tag>开源</tag>
       
     </tags>
     
