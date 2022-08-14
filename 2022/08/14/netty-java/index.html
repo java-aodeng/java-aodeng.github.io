@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://uss.ilovey.live/img/favicon.ico">
+  <link rel="icon" href="https://uss.ilovey.live/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="使用Netty与硬件设备通讯，优点，达到百万连接没有任何难度">
+  <meta name="author" content="低调小熊猫">
+  <meta name="keywords" content="">
+  
+  <title>使用Java-Netty实现长连接 - 低调小熊猫</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://uss.ilovey.live/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>低调小熊猫</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/footprint/">
+                <i class="iconfont icon-code"></i>
+                足迹
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://travellings.link">
+                <i class="iconfont icon-codeforces"></i>
+                开往
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-pen"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-bookmark-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-reddit-fill"></i>
+                趣味
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/sit_back/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    摸鱼神器
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/mikutap/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    在线打碟
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Fifteen_puzzle_maker/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    在线拼图
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/NeverGiveUp/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    永不放弃
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/run/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    神庙逃亡
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Gobang/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    五子棋
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/chinesechess/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    中国象棋
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/battlecity/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    坦克大战
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/shengcun/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    生存游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/zoumigong/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    小球走迷宫
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Planetgame/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    星球防御
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/StreetFighter/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    街机霸王
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/lei/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    扫雷
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/laji/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    辣稽
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/2048/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    2048
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/cat">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    抓住猫咪
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/dizhu/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    斗地主
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/color_site/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    色图网站
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/high">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    燥起来
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mv">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    历史正文
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://uss.ilovey.live/img/article.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="使用Java-Netty实现长连接">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      低调小熊猫
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-08-14 10:29" pubdate>
+        2022年8月14日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">使用Java-Netty实现长连接</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年8月14日 上午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>使用Netty与硬件设备通讯，优点，达到百万连接没有任何难度</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="1-maven依赖"><a href="#1-maven依赖" class="headerlink" title="1.maven依赖"></a>1.maven依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--netty所需--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>io.netty<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>netty-all<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.1.46.Final<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-配置启动服务"><a href="#2-配置启动服务" class="headerlink" title="2.配置启动服务"></a>2.配置启动服务</h4><p>在application.yml添加配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment">#netty配置</span><br><span class="hljs-attr">netty:</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">server:</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">8543</span><br></code></pre></td></tr></table></figure>
+
+<p>创建启动服务类</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * @author AoDeng</span><br><span class="hljs-comment"> * @date 2022/8/12</span><br><span class="hljs-comment"> */</span><br>@Component<br>public <span class="hljs-keyword">class</span> NettyServer &#123;<br><br>    <span class="hljs-keyword">private</span> static final Logger log = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LoggerFactory</span>.</span></span>get<span class="hljs-constructor">Logger(NettyServer.<span class="hljs-params">class</span>)</span>;<br><br>    @<span class="hljs-constructor">Value(<span class="hljs-string">&quot;$&#123;netty.server.port&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">private</span> Integer nettyPort;<br><br>    @<span class="hljs-constructor">Value(<span class="hljs-string">&quot;$&#123;netty.enable&#125;&quot;</span>)</span><br>    <span class="hljs-keyword">private</span> boolean enable;<br><br>    @Autowired<br>    <span class="hljs-keyword">private</span> NettyServerEventHandle nettyEventHandle;<br><br>    <span class="hljs-keyword">private</span> EventLoopGroup boss = <span class="hljs-keyword">new</span> <span class="hljs-constructor">NioEventLoopGroup()</span>;<br><br>    <span class="hljs-keyword">private</span> EventLoopGroup work = <span class="hljs-keyword">new</span> <span class="hljs-constructor">NioEventLoopGroup()</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 启动 Netty</span><br><span class="hljs-comment">     */</span><br>    @PostConstruct<br>    public void start<span class="hljs-literal">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (enable) &#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>                ServerBootstrap bootstrap = <span class="hljs-keyword">new</span> <span class="hljs-constructor">ServerBootstrap()</span><br>                        .group(boss, work)<br>                        .channel(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">NioServerSocketChannel</span>.</span></span><span class="hljs-keyword">class</span>)<br>                        .local<span class="hljs-constructor">Address(<span class="hljs-params">new</span> InetSocketAddress(<span class="hljs-params">nettyPort</span>)</span>)<br>                        <span class="hljs-comment">//服务端接受连接的队列长度，如果队列已满，客户端连接将被拒绝</span><br>                        .option(ChannelOption.SO_BACKLOG, <span class="hljs-number">128</span>)<br>                        <span class="hljs-comment">//Socket参数，连接保活，默认值为False。启用该功能时，TCP会主动探测空闲连接的有效性。</span><br>                        <span class="hljs-comment">//可以将此功能视为TCP的心跳机制，需要注意的是：默认的心跳间隔是7200s即2小时。Netty默认关闭该功能。</span><br>                        .child<span class="hljs-constructor">Option(ChannelOption.SO_KEEPALIVE, <span class="hljs-params">true</span>)</span><br>                        .child<span class="hljs-constructor">Handler(<span class="hljs-params">new</span> ChannelInitializer&lt;SocketChannel&gt;()</span> &#123;<br>                            @Override<br>                            protected void init<span class="hljs-constructor">Channel(SocketChannel <span class="hljs-params">ch</span>)</span> &#123;<br>                                ch.pipeline<span class="hljs-literal">()</span><br>                                        .add<span class="hljs-constructor">Last(<span class="hljs-params">new</span> IdleStateHandler(60, 60, 20, TimeUnit.SECONDS)</span>)<br>                                        .add<span class="hljs-constructor">Last(<span class="hljs-params">nettyEventHandle</span>)</span>;<br>                            &#125;<br>                        &#125;);<br>                <span class="hljs-comment">//绑定并开始接受传入的连接。</span><br>                ChannelFuture future = bootstrap.bind<span class="hljs-literal">()</span>.sync<span class="hljs-literal">()</span>;<br>                <span class="hljs-keyword">if</span> (future.is<span class="hljs-constructor">Success()</span>) &#123;<br>                    log.info(<span class="hljs-string">&quot;Start Netty Serve Success..&quot;</span>);<br>                &#125;<br>            &#125; catch (Exception e) &#123;<br>                log.error(<span class="hljs-string">&quot;启动Netty服务异常,异常原因:&#123;&#125;&quot;</span>, e.get<span class="hljs-constructor">Message()</span>);<br>            &#125;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 销毁</span><br><span class="hljs-comment">     */</span><br>    @PreDestroy<br>    public void destroy<span class="hljs-literal">()</span> &#123;<br>        boss.shutdown<span class="hljs-constructor">Gracefully()</span>.sync<span class="hljs-constructor">Uninterruptibly()</span>;<br>        work.shutdown<span class="hljs-constructor">Gracefully()</span>.sync<span class="hljs-constructor">Uninterruptibly()</span>;<br>        log.info(<span class="hljs-string">&quot;Close Netty Serve Success..&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="3-事件监听，业务处理"><a href="#3-事件监听，业务处理" class="headerlink" title="3.事件监听，业务处理"></a>3.事件监听，业务处理</h4><p>在channelRead方法中，接收消息，处理相关业务即可</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * @author AoDeng</span><br><span class="hljs-comment"> * @date 2022/8/12</span><br><span class="hljs-comment"> */</span><br>@Component<br>@ChannelHandler.Sharable<br>public <span class="hljs-keyword">class</span> NettyServerEventHandle extends ChannelInboundHandlerAdapter &#123;<br><br>    <span class="hljs-keyword">private</span> static final Logger log = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LoggerFactory</span>.</span></span>get<span class="hljs-constructor">Logger(NettyServerEventHandle.<span class="hljs-params">class</span>)</span>;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 事件监听</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public void user<span class="hljs-constructor">EventTriggered(ChannelHandlerContext <span class="hljs-params">ctx</span>, Object <span class="hljs-params">evt</span>)</span> throws Exception &#123;<br>        <span class="hljs-comment">//获取当前信道状态</span><br>        IdleStateEvent event = (IdleStateEvent) evt;<br>        <span class="hljs-comment">//连接客户端ID</span><br>        String channelId = ctx.channel<span class="hljs-literal">()</span>.id<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        switch (event.state<span class="hljs-literal">()</span>) &#123;<br>            <span class="hljs-comment">//读空闲</span><br>            case READER_IDLE:<br>                break;<br>            <span class="hljs-comment">//写空闲</span><br>            case WRITER_IDLE:<br>                break;<br>            <span class="hljs-comment">//读写空闲</span><br>            case ALL_IDLE:<br>                log.info(<span class="hljs-string">&quot;服务端向客户端ID:&#123;&#125;发送心跳数据..&quot;</span>, channelId);<br>                ctx.write<span class="hljs-constructor">AndFlush(MessageUtil.<span class="hljs-params">sendMessage</span>(JSONObject.<span class="hljs-params">toJSONString</span>(NettyConfig.SEND_HEAR_MESSAGE)</span>));<br>                break;<br>            default:<br>                break;<br>        &#125;<br>        super.user<span class="hljs-constructor">EventTriggered(<span class="hljs-params">ctx</span>, <span class="hljs-params">evt</span>)</span>;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接收到消息的时候触发</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public void channel<span class="hljs-constructor">Read(ChannelHandlerContext <span class="hljs-params">ctx</span>, Object <span class="hljs-params">msg</span>)</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//消息体</span><br>            String info = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">MessageUtil</span>.</span></span>get<span class="hljs-constructor">Message(<span class="hljs-params">msg</span>)</span>;<br>            <span class="hljs-comment">//连接客户端ID</span><br>            String channelId = ctx.channel<span class="hljs-literal">()</span>.id<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>            log.info(<span class="hljs-string">&quot;（处理前）收到ID:&#123;&#125;发来的消息:&#123;&#125;&quot;</span>, channelId, info+<span class="hljs-string">&quot; : &quot;</span>+info.length<span class="hljs-literal">()</span>);<br><br>            <span class="hljs-comment">//TODO 消息体根据具体业务处理转换...</span><br><br>            log.info(<span class="hljs-string">&quot;（处理后）收到客户端ID:&#123;&#125;发来的消息:&#123;&#125;&quot;</span>, channelId, info+<span class="hljs-string">&quot; : &quot;</span>+info.length<span class="hljs-literal">()</span>);<br>            <span class="hljs-comment">//处理业务开始...</span><br><br>            <span class="hljs-comment">//TODO 收到消息后处理具体业务...</span><br><br>        &#125; catch (Exception e) &#123;<br>            log.error(e.get<span class="hljs-constructor">Message()</span>,e);<br>            ctx.write<span class="hljs-constructor">AndFlush(MessageUtil.<span class="hljs-params">sendMessage</span>(JSONObject.<span class="hljs-params">toJSONString</span>(NettyConfig.RESPONSE_ERROR_MESSAGE)</span>));<br>        &#125;<br>    &#125;<br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 绑定</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public void channel<span class="hljs-constructor">Active(ChannelHandlerContext <span class="hljs-params">ctx</span>)</span> &#123;<br>        <span class="hljs-comment">//获取客户端IP地址进行身份验证</span><br>        String ipAddress = ctx.channel<span class="hljs-literal">()</span>.remote<span class="hljs-constructor">Address()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        String channelId = ctx.channel<span class="hljs-literal">()</span>.id<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        log.info(<span class="hljs-string">&quot;客户端ID:&#123;&#125;,IP地址:&#123;&#125;已经成功连接....&quot;</span>, channelId, ipAddress);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 取消绑定</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public void channel<span class="hljs-constructor">Inactive(ChannelHandlerContext <span class="hljs-params">ctx</span>)</span> &#123;<br><br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 抛出异常的时候触发</span><br><span class="hljs-comment">     */</span><br>    @Override<br>    public void <span class="hljs-keyword">exception</span><span class="hljs-constructor">Caught(ChannelHandlerContext <span class="hljs-params">ctx</span>, Throwable <span class="hljs-params">cause</span>)</span> throws Exception &#123;<br>        String channelId = ctx.channel<span class="hljs-literal">()</span>.id<span class="hljs-literal">()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        String ipAddress = ctx.channel<span class="hljs-literal">()</span>.remote<span class="hljs-constructor">Address()</span>.<span class="hljs-keyword">to</span><span class="hljs-constructor">String()</span>;<br>        log.error(<span class="hljs-string">&quot;客户端ID:&#123;&#125;,IP地址:&#123;&#125;发生了异常....&quot;</span>, channelId, ipAddress);<br>        super.<span class="hljs-keyword">exception</span><span class="hljs-constructor">Caught(<span class="hljs-params">ctx</span>, <span class="hljs-params">cause</span>)</span>;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="消息编码工具"><a href="#消息编码工具" class="headerlink" title="消息编码工具"></a>消息编码工具</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author <span class="hljs-variable">AoDeng</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date </span>2022/8/12</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessageUtil</span> </span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 发送消息编码</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param </span>message 消息体</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return </span>编码之后的消息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ByteBuf <span class="hljs-function"><span class="hljs-title">sendMessage</span>(<span class="hljs-params"><span class="hljs-built_in">String</span> message</span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> Unpooled.wrappedBuffer((message).getBytes((CharsetUtil.UTF_8)));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 接收消息编码</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param </span>message 消息体</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return </span>解码之后的消息</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-built_in">String</span> <span class="hljs-function"><span class="hljs-title">getMessage</span>(<span class="hljs-params"><span class="hljs-built_in">Object</span> message</span>)</span> &#123;<br>        <span class="hljs-keyword">return</span> ((ByteBuf) message).toString(CharsetUtil.UTF_8);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> AoDeng</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@date</span> 2022/8/12</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NettyConfig</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> SEND_HEAR_MESSAGE = <span class="hljs-string">&quot;服务器发送心跳数据..&quot;</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> RESPONSE_HEAR_MESSAGE = <span class="hljs-string">&quot;服务器收到客户端响应数据..&quot;</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-built_in">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">String</span> RESPONSE_ERROR_MESSAGE = <span class="hljs-string">&quot;服务器处理消息错误,请稍等重试..&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="测试运行"><a href="#测试运行" class="headerlink" title="测试运行"></a>测试运行</h4><p>启动项目，下载个tcp工具，访问127.0.0.1:8543 即可模拟通讯</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p><a target="_blank" rel="noopener" href="https://github.com/java-aodeng/demo-netty-20220812">https://github.com/java-aodeng/demo-netty-20220812</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BC%80%E6%BA%90/">开源</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%90%8E%E7%AB%AF/">后端</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Netty/">Netty</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，最终版权归原作者 <a target="_blank" rel="noopener" href="https://ilovey.live">低调小熊猫<a/> 所有，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/02/golang-example/">
+                        <span class="hidden-mobile">Go语言从入门到精通</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wmfkkqrS00AbmsGwdFPbOQbA-gzGzoHsz","appKey":"M7QXdlW6Nv0JW2Kdg055JuYU","placeholder":"说点什么吧，可留言申请加入友链","path":"window.location.pathname","avatar":"retro","meta":["nick","mail","link"],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true,"requiredFields":[]},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://uss.ilovey.live/img/logo.gif" srcset="https://uss.ilovey.live/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备18057116号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f5cdf0573c2e53438c222dcf9c80fcec";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-6W2BTPTK9H', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/love.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
