@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://uss.ilovey.live/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -391,7 +391,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://uss.ilovey.live/img/article.png') no-repeat center center;
+         style="background: url('/img/article.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -475,7 +475,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年9月24日 下午
+                  本文最后更新于：2024年5月19日 下午
                 
               </p>
             
@@ -498,7 +498,7 @@
 <h4 id="启动Konga"><a href="#启动Konga" class="headerlink" title="启动Konga"></a>启动Konga</h4><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">docker run -d --name konga <span class="hljs-string">\</span><br>             --network kong-net <span class="hljs-string">\</span><br>             -e <span class="hljs-string">&quot;TOKEN_SECRET=secret123&quot;</span> <span class="hljs-string">\</span><br>             -e <span class="hljs-string">&quot;DB_ADAPTER=postgres&quot;</span> <span class="hljs-string">\</span><br>             -e <span class="hljs-string">&quot;DB_URI=postgres://kong:kong@kong-database:5432/konga&quot;</span> <span class="hljs-string">\</span><br>             -e <span class="hljs-string">&quot;NODE_ENV=development&quot;</span> <span class="hljs-string">\</span><br>             -p <span class="hljs-number">1337</span>:<span class="hljs-number">1337</span> <span class="hljs-string">\</span><br>             pantsel/konga<br></code></pre></td></tr></table></figure>
 
 <h4 id="使用Konga"><a href="#使用Konga" class="headerlink" title="使用Konga"></a>使用Konga</h4><p>访问<a target="_blank" rel="noopener" href="http://localhost:1337/">http://localhost:1337</a> 来访问Konga：</p>
-<p><img src="https://uss.ilovey.live/img/posts/konga-weicome.png" srcset="https://uss.ilovey.live/img/loading.gif" lazyload></p>
+<p><img src="/img/posts/konga-weicome.png" srcset="/img/loading.gif" lazyload></p>
 <p>在Konga上配置<br>注册admin用户<br>初次使用Konga前，需要先注册一个Admin用户。</p>
 <p>配置Kong连接<br>在Konga上，打开Connections，选择新建一个Kong连接<br>然<br>选择连接类型为key Auth，输入连接名称、Loopback API URL和API Key。</p>
 <p>更多内容可以参考官方资料：<a target="_blank" rel="noopener" href="https://docs.konghq.com/">https://docs.konghq.com</a></p>
@@ -641,7 +641,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://uss.ilovey.live/img/logo.gif" srcset="https://uss.ilovey.live/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="/img/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
 
   </div>
   

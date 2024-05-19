@@ -56,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"https://uss.ilovey.live/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -391,7 +391,7 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://uss.ilovey.live/img/article.png') no-repeat center center;
+         style="background: url('/img/article.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -475,7 +475,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年10月2日 上午
+                  本文最后更新于：2024年5月19日 下午
                 
               </p>
             
@@ -491,8 +491,8 @@
 <li>网关：spring cloud gateway</li>
 <li>链路：spring cloud sleuth+zipkin，替代方案：skywalking等</li>
 </ul>
-<h4 id="总体架构图"><a href="#总体架构图" class="headerlink" title="总体架构图"></a>总体架构图</h4><p><img src="https://uss.ilovey.live/img/posts/springcloud2020-%E6%9E%B6%E6%9E%84%E5%9B%BE.png" srcset="https://uss.ilovey.live/img/loading.gif" lazyload></p>
-<h4 id="版本关系"><a href="#版本关系" class="headerlink" title="版本关系"></a>版本关系</h4><p><img src="https://uss.ilovey.live/img/posts/springcloud-version.png" srcset="https://uss.ilovey.live/img/loading.gif" lazyload></p>
+<h4 id="总体架构图"><a href="#总体架构图" class="headerlink" title="总体架构图"></a>总体架构图</h4><p><img src="/img/posts/springcloud2020-%E6%9E%B6%E6%9E%84%E5%9B%BE.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="版本关系"><a href="#版本关系" class="headerlink" title="版本关系"></a>版本关系</h4><p><img src="/img/posts/springcloud-version.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="使用nacos作为注册中心和配置中心"><a href="#使用nacos作为注册中心和配置中心" class="headerlink" title="使用nacos作为注册中心和配置中心"></a>使用nacos作为注册中心和配置中心</h3><h4 id="下载nacos"><a href="#下载nacos" class="headerlink" title="下载nacos"></a>下载nacos</h4><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos">https://github.com/alibaba/nacos</a> </p>
 <h4 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h4><p>创建mysql数据库nacos，导入 conf/nacos-mysql.sql</p>
 <h4 id="配置数据库"><a href="#配置数据库" class="headerlink" title="配置数据库"></a>配置数据库</h4><p>修改 conf/application.properties</p>
@@ -553,7 +553,7 @@
 <li>spring.profile.active 即为当前环境对应的 profile，详情可以参考 Spring Boot文档。 注意：当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId 的拼接格式变成 ${prefix}.${file-extension}</li>
 <li>file-exetension 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。<br>启动nacos，登陆localhost:8848/nacos，创建一个data id ，完整的配置如图所示：</li>
 </ul>
-<p><img src="https://uss.ilovey.live/img/posts/nacos%E9%85%8D%E7%BD%AE.png" srcset="https://uss.ilovey.live/img/loading.gif" lazyload></p>
+<p><img src="/img/posts/nacos%E9%85%8D%E7%BD%AE.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="源码下载："><a href="#源码下载：" class="headerlink" title="源码下载："></a>源码下载：</h4><p><a target="_blank" rel="noopener" href="https://github.com/java-aodeng/springcloud2020-demo-1">https://github.com/java-aodeng/springcloud2020-demo-1</a></p>
 <h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><p><a target="_blank" rel="noopener" href="https://www.fangzhipeng.com/spring-cloud.html">https://www.fangzhipeng.com/spring-cloud.html</a><br><a target="_blank" rel="noopener" href="https://spring.io/projects/spring-cloud">https://spring.io/projects/spring-cloud</a><br><a target="_blank" rel="noopener" href="https://www.springcloud.cc/">https://www.springcloud.cc/</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/llllllllll4er5ty/article/details/104425284">https://blog.csdn.net/llllllllll4er5ty/article/details/104425284</a></p>
 
@@ -702,7 +702,7 @@
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
-     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="https://uss.ilovey.live/img/logo.gif" srcset="https://uss.ilovey.live/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="/img/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
 
   </div>
   
