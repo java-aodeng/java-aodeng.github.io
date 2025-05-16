@@ -1,0 +1,924 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="低调小熊猫">
+  <meta name="keywords" content="">
+  
+  <title>page.title - 低调小熊猫</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"f5cdf0573c2e53438c222dcf9c80fcec","google":"G-6W2BTPTK9H","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="低调小熊猫" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>低调小熊猫</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" target="_blank" rel="noopener" href="https://travellings.link">
+                <i class="iconfont icon-codeforces"></i>
+                开往
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文章
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-pen"></i>
+                    分类
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-bookmark-fill"></i>
+                    标签
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-reddit-fill"></i>
+                趣味
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/sit_back/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    摸鱼神器
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/mikutap/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    在线打碟
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Fifteen_puzzle_maker/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    在线拼图
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/NeverGiveUp/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    永不放弃
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/run/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    神庙逃亡
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Gobang/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    五子棋
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/chinesechess/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    中国象棋
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/battlecity/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    坦克大战
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/shengcun/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    生存游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/zoumigong/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    小球走迷宫
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/Planetgame/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    星球防御
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/StreetFighter/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    街机霸王
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/lei/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    扫雷
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/laji/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    辣稽
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/2048/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    2048
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/cat">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    抓住猫咪
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/dizhu/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    斗地主
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/games/color_site/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    色图网站
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/high">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    燥起来
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/game/mv">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    历史正文
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss"></i>
+                RSS
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="page.title">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>做我女朋友好不好|低调小熊猫</title>
+<!-- style -->
+<link type="text/css" rel="stylesheet" href="css/theme.css">
+<script src="js/jquery-2.0.3.min.js"></script>
+</head>
+<body>
+<div id="div_container">
+	<!-- 最外层div，用于居中兼容PC和移动 -->
+	<div id="div_start_bg"></div>
+	<div id="div_onlyyou">
+		<!-- 用于设置背景 -->
+		<div id="div_oy_inner">
+			<!-- 用于存放content -->
+			<div class="div_oy_text">
+				<h1></h1>
+				<img class="img_oy_text" src="" srcset="/img/loading.gif" lazyload>
+				<p class="p_oy_text"></p>
+				<ul id="ul_oy_benefit">
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+					<li class="li_oy_benefit"></li>
+				</ul>
+			</div>
+			<ul id="ul_oy_btn">
+				<li onclick="oy_go_next()">Yes&nbsp;&nbsp;❤</li>
+				<li onclick="oy_show_benefit()">No&nbsp;&nbsp;✖</li>
+			</ul>
+			<div id="div_oy_note" onclick="oy_hide_note()">
+				<img src="images/emoji_kelian.jpg" srcset="/img/loading.gif" lazyload alt=""><br>请告诉我Yes！
+				<div id="div_oy_note_close">✖</div>
+			</div>
+			<div id="div_oy_yes">
+				<img src="images/emoji_bixin.jpg" srcset="/img/loading.gif" lazyload alt=""><br>太好了！哈哈~
+			</div>
+		</div>
+	</div>
+	<div class="div_pure_words">
+		<div class="div_pure_words_bg">
+			<div class="div_pure_words_height"></div>
+		</div>
+		<div class="div_pw_typed">
+			<span id="span_pw_typed"></span>
+		</div>
+	</div>
+	<div id="div_btn_container">
+		<div id="div_btn_inner">
+			<div class="div_music_tips"></div>
+			<div class="div_btn" id="div_music" onclick="music_switch()">
+				<!-- 音乐按钮部分 -->
+				<img id="img_music" src="images/music_note_big.png" srcset="/img/loading.gif" lazyload style="-webkit-animation:music_play_rotate 1s linear infinite">
+				<!-- 您的浏览器不支持播放音乐 -->
+				<audio id="audio_music" autoplay="autoplay" loop="loop"><source type="audio/mpeg"/></audio>
+			</div>
+			<div class="div_record_tips"></div>
+			<div class="div_btn" id="div_record" onclick="record_switch()">
+				<audio id="audio_record" loop="loop"><source type="audio/mpeg"/></audio>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+//判断客户端设备，选择写入meta
+function init_viewport() {
+	if (navigator.userAgent.indexOf('Android') != -1) {
+		var version = parseFloat(RegExp.$1);
+		if (version > 2.3) {
+			var width = window.outerWidth == 0 ? window.screen.width : window.outerWidth;
+			var phoneScale = parseInt(width) / 500;
+			document.write('<meta name="viewport" content="width=500, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+		} else {
+			document.write('<meta name="viewport" content="width=500, target-densitydpi=device-dpi, user-scalable=0">');
+		}
+	} else if (navigator.userAgent.indexOf('iPhone') != -1) {
+		var phoneScale = parseInt(window.screen.width) / 500;
+		document.write('<meta name="viewport" content="width=500, min-height=750, initial-scale=' + phoneScale + ', maximum-scale=' + phoneScale + ', user-scalable=0" /> '); //0.75   0.82
+	} else {
+		document.write('<meta name="viewport" content="width=500, height=750, initial-scale=0.64" /> '); //0.75  0.82
+	}
+}
+init_viewport();
+
+var theme = 'pure_words';
+console.log('theme ->' + theme);
+var theme_content = {
+	"pure_words_content": "遇见你是我所有美好故事的开始，所以，请别放开我的手，也别缺席我的将来，因为一辈子和你在一起才叫将来<um style='color: #F44336;'>💕</um>",
+	"typed_bool": "typed_y",
+	"cursor_char": "cursor_heart",
+	"bg_style_pure_words": "bg_opacity",
+	"bg_img": "images/3.jpg",
+	"simple_page_content": "",
+	"video_page_content": ""
+};
+console.log(theme_content);
+
+var music_json = {
+	"music_select": "m_online",
+	"m_online_id": "7",
+	"m_online_url": "images/1.mp3",
+	"m_upload_name": "null",
+	"m_upload_url": "null"
+};
+console.log(music_json);
+var record_json = {
+	"record_bool": "r_false",
+	"r_wechat_time": "null",
+	"r_wechat_url": "null",
+	"r_wechat_amr": "null"
+};
+console.log(record_json);
+
+
+var main_title = '我喜欢你❤️';
+// console.log(main_title);
+if (main_title == '' || main_title == 'null') { //允许标题为空
+	document.title = '慢慢喜欢你';
+}
+
+var window_height = $(window).height();
+console.log('window_height ->' + window_height);
+var pure_words_content = theme_content['pure_words_content'];
+var str_cursorChar;
+var typed_bool;
+var interval_pw_height;
+var height_div_pw = $(".div_pure_words_height").height();
+function init_pure_words() {
+	$(".div_pure_words_height").html(pure_words_content + '22222'); //初始化复制内容，撑开文档高度            
+	// 初始化设置div的bg图片 初始化设置div的bg图片
+	if (typeof(theme_content['bg_style_pure_words']) != 'undefined' && theme_content['bg_style_pure_words'] == 'bg_opacity') {
+		if (typeof(theme_content['bg_img']) != 'undefined' && theme_content['bg_img'] != '') {
+			$(".div_pure_words_bg").css({
+				"background-image": "url(" + theme_content['bg_img'] + ")"
+			});
+		}
+	}
+	//以下是打字效果的js 
+	if (typeof(theme_content['cursor_char']) != 'undefined' && theme_content['cursor_char'] != '') {
+		switch (theme_content['cursor_char']) { //设置打字光标的样式
+		case 'cursor_heart':
+			str_cursorChar = '<um style="color: #F44336;">❤</um>';
+			break;
+		case 'cursor_sub':
+			str_cursorChar = '_';
+			break;
+		case 'cursor_music':
+			str_cursorChar = '♫';
+			break;
+		case 'cursor_star':
+			str_cursorChar = '★';
+			break;
+		case 'cursor_sun':
+			str_cursorChar = '☀';
+			break;
+		default:
+			str_cursorChar = '|';
+		}
+	} else { //处理全新作品，默认显示打字效果
+		str_cursorChar = '❤';
+	}
+	//判断用户有没有选择打字效果
+	if (typeof(theme_content['typed_bool']) != 'undefined' && theme_content['typed_bool'] != '') {
+		typed_bool = theme_content['typed_bool'] == 'typed_y' ? true : false;
+	} else {
+		typed_bool = false; //默认显示打字效果
+	}
+	display_pure_words();
+	$(".div_pure_words").fadeIn();
+	interval_pw_height = setInterval(function() {
+		console.log('div_pure_words_height -> ' + $('.div_pure_words_height').height());
+		var least_height_div_pw = $('.div_pure_words_height').height();
+		if (least_height_div_pw > height_div_pw) {
+			height_div_pw = least_height_div_pw;
+		} else {
+			clearInterval(interval_pw_height);
+			$(".div_pure_words_height").height(least_height_div_pw + 100);
+			if ($(".div_pure_words_height").height() < window_height) {
+				$(".div_pure_words_height").height(window_height); //不能小于窗口的高度
+				console.log('let us be high as window');
+			}
+		}
+	}, 100);
+}
+
+function display_pure_words() {
+	if (typed_bool) {
+		var typed_pure_words = new Typed('#span_pw_typed', {
+			strings: [pure_words_content],
+			//输入内容, 支持html标签
+			typeSpeed: 120,
+			//打字速度
+			cursorChar: str_cursorChar,
+			//替换光标的样式
+			contentType: 'html',
+			//值为html时，将打印的文本标签直接解析html标签
+			onComplete: function(abc) {
+				// console.log(abc); 
+				console.log('finished typing words');
+				// console.log($('#span_pw_typed').height()-$(".div_pure_words_height").height());
+			},
+		});
+	} else {
+		//如果不需要打字效果就直接显示
+		$("#span_pw_typed").html(pure_words_content).fadeIn();
+	}
+	init_attachment();
+}
+var start_content = {
+	chase_title: "做我女朋友好不好<um style='color: #F44336;'>💕</um>",
+	chase_text: "承蒙你的出现，够我喜欢好多年，我希望，以后你能用我的名字拒绝所有人<um style='color: #F44336;'>💕</um>",
+	chase_benefit: ['我会把全部工资都给你','每天做好吃的给你','你睡不着时给你讲故事','给你自由去做喜欢的事情',"你是我拔掉氧气罐都想吻的人", "你是我跑完8000米还想拥抱的人", "你是我自罚三杯都不肯开口的秘密", "你是我赴汤蹈火都不肯放下的执着", "你是我电量只剩1%也想回信息的人", "你是我穷极一生不想醒来的梦", "我偷偷地碰了你一下，不料你像蒲公英一样散开，此后到处都是你的模样。"],
+	bg_style: "bg_custom",
+	bg_img: "images/2.jpg",
+	img_bool: "img_true",
+	img_src: "images/1.gif"
+}; //可能为null
+console.log(start_content);
+var start_id;
+$(function() {
+	//此事件为触发互动创意
+	start_id = 'onlyyou'; //可能为null
+	init_start(start_id);
+});
+function init_start(start_id) {
+	console.log('init_start ->' + start_id);
+	switch (start_id) {
+	case 'loveformat':
+		$('.div_loveformat').show();
+		init_loveformat();
+		break;
+	case 'hearttree':
+		$('#div_hearttree').show();
+		init_hearttree();
+		break;
+	case 'courage':
+		$('#div_courage').show();
+		init_courage();
+		break;
+	case 'birthdaycake':
+		$('#div_dbcake').show();
+		init_birthdaycake();
+		break;
+	case 'intersect':
+		$('#div_intersect').show();
+		init_intersect();
+		break;
+	case 'onlyyou':
+		$('#div_onlyyou').show();
+		init_onlyyou();
+		break;
+	default:
+		init_theme();
+	}
+}
+//开始动画主体部分
+function init_theme() {
+	console.log('init_theme');
+	$('#div_start_bg').fadeOut();
+	init_pure_words();
+}
+var attachment = 'null'; //可能为null
+var attached_content = {
+	"bool_save": false
+}; //可能为null
+console.log(attached_content);
+
+function init_attachment() { //开始attachment
+	console.log('init_attachment ->' + attachment);
+	switch (attachment) {
+	case 'timer':
+		init_at_timer();
+		break;
+	default:
+		return;
+	}
+}
+</script>
+<!-- JQuery -->
+<script src="js/typed.min.js"></script>
+<script src="js/start_onlyyou.js"></script>
+<script src="js/jweixin-1.2.0.js"></script>
+<script src='js/theme_common.js'></script>
+</body>
+</html>
+
+  
+</article>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://travellings.link/" target="_blank" rel="noopener" title="开往-友链接力"> <img src="/img/logo.gif" srcset="/img/loading.gif" lazyload alt="开往-友链接力" width="120"> </a><br/> © 2018-2022 低调小熊猫 <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        浙ICP备18057116号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?f5cdf0573c2e53438c222dcf9c80fcec";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script defer>
+      window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) };
+      ga.l = +new Date;
+      ga('create', 'G-6W2BTPTK9H', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/love.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
